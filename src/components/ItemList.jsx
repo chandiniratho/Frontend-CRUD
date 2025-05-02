@@ -9,7 +9,7 @@ const ItemList = ({ items, onEdit, onDelete, onView }) => {
     <div className={styles.tableContainer}>
       <Droppable droppableId="droppable-table">
         {(droppableProvided) => (
-          <table className={styles.table}>
+          <table className={styles.table} ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -19,10 +19,7 @@ const ItemList = ({ items, onEdit, onDelete, onView }) => {
               </tr>
             </thead>
 
-            <tbody
-              ref={droppableProvided.innerRef}
-              {...droppableProvided.droppableProps}
-            >
+            <tbody>
               {items.map((item, index) => (
                 <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                   {(draggableProvided) => (

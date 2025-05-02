@@ -11,7 +11,7 @@ import SearchBar from '../components/SearchBar';
 import Button from '../components/Button';
 import { fakeAuth } from '../auth/authService';
 import Papa from 'papaparse';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';  // For drag-and-drop
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styles from '../styles/App.module.css';
 
 const Dashboard = () => {
@@ -113,21 +113,20 @@ const Dashboard = () => {
       <h1>Frontend CRUD Manager</h1>
 
       <div className={styles.topBar}>
-  <Button onClick={handleLogout}>Logout</Button>
-  <Button onClick={handleDarkModeToggle}>
-    {darkMode ? 'Light Mode' : 'Dark Mode'}
-  </Button>
-  <Button onClick={handleExport}>Export to CSV</Button>
-</div>
-
+        <Button onClick={handleLogout}>Logout</Button>
+        <Button onClick={handleDarkModeToggle}>
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </Button>
+        <Button onClick={handleExport}>Export to CSV</Button>
+      </div>
 
       <SearchBar value={search} onChange={setSearch} />
 
       {userRole === 'admin' && (
-        <Button onClick={() => { 
+        <Button onClick={() => {
           setEditing(false); // Reset to "Add" mode
           setSelected(null); // Clear selected item
-          setShowModal(true); 
+          setShowModal(true);
         }}>Add Item</Button>
       )}
 
@@ -135,17 +134,19 @@ const Dashboard = () => {
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="items">
           {(provided) => (
-            <ItemList
-              items={paginated}
-              onView={setViewItem}
-              onEdit={(item) => {
-                setSelected(item);      // select the item
-                setEditing(true);       // set editing to true
-                setShowModal(true);     // show the modal
-              }}
-              onDelete={handleDelete}
-              provided={provided}  // provided for drag-and-drop functionality
-            />
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <ItemList
+                items={paginated}
+                onView={setViewItem}
+                onEdit={(item) => {
+                  setSelected(item);      // select the item
+                  setEditing(true);       // set editing to true
+                  setShowModal(true);     // show the modal
+                }}
+                onDelete={handleDelete}
+              />
+              {provided.placeholder}
+            </div>
           )}
         </Droppable>
       </DragDropContext>

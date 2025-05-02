@@ -27,20 +27,56 @@
   }
   
   /* ===== Layout Containers ===== */
-  .container {
+  .container, .darkContainer {
     padding: 2rem;
-    max-width: 960px;
+    
     margin: 0 auto;
     background-color: #f8f9fa;
     color: #212529;
+    flex-grow: 1; /* Ensures full height */
+    min-height: 100vh;  /* Ensures full screen height */
+    display: flex;
+    flex-direction: column;
   }
   
   .darkContainer {
-    padding: 2rem;
-    max-width: 960px;
-    margin: 0 auto;
     background-color: #121212;
     color: #f8f9fa;
+  }
+  
+  /* ===== Modal ===== */
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  /* ===== Login Layout ===== */
+  .loginContainer {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .darkLoginContainer {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: #1f1f1f;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    text-align: center;
   }
   
   /* ===== Top Action Bar ===== */
@@ -90,19 +126,6 @@
     margin: 1rem 0;
   }
   
-  /* ===== Modal ===== */
-  .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-  }
-  
   /* ===== Toast ===== */
   .toast {
     position: fixed;
@@ -135,30 +158,68 @@
   .pagination button:hover {
     background-color: #ccc;
   }
-  .loginContainer {
-    max-width: 400px;
-    margin: 5rem auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+  /* ===== Responsive Styles for Mobile Devices ===== */
+@media (max-width: 768px) {
+    .container,
+    .darkContainer,
+    .loginContainer,
+    .darkLoginContainer {
+      padding: 1rem;
+    }
   
-  .darkLoginContainer {
-    max-width: 400px;
-    margin: 5rem auto;
-    padding: 2rem;
-    background-color: #1f1f1f;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-    text-align: center;
-  }
+    .loginContainer,
+    .darkLoginContainer {
+      margin: 2rem auto;
+      width: 90%;
+    }
   
-  .loginError {
-    color: red;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    .button {
+      width: 100%;
+      padding: 0.75rem;
+    }
+  
+    .input {
+      font-size: 0.95rem;
+      padding: 0.6rem;
+    }
+  
+    .topBar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+  
+    .modal {
+      width: 90%;
+      padding: 1.5rem;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  
+    .actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .toast {
+      bottom: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.8rem;
+      padding: 0.75rem 1rem;
+    }
+  
+    .pagination {
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+  
+    .pagination button {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.85rem;
+    }
   }
   

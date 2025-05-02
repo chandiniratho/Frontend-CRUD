@@ -1,5 +1,6 @@
 export const fakeAuth = {
-    isAuthenticated: false,
+    // Check if the user is authenticated from localStorage
+    isAuthenticated: localStorage.getItem('user') ? true : false,
   
     login(username, password) {
       const validCredentials = [
@@ -8,7 +9,7 @@ export const fakeAuth = {
       ];
   
       const user = validCredentials.find(
-        cred => cred.username === username && cred.password === password
+        (cred) => cred.username === username && cred.password === password
       );
   
       if (user) {

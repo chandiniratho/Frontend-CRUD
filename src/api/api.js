@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = '/items'; // Now using the relative URL, which Vite will proxy to MockAPI
+// Use full URL directly for compatibility with GitHub Pages
+const API_URL = 'https://68146c89225ff1af1628c822.mockapi.io/items';
 
 export const getItems = () => axios.get(API_URL);
 export const createItem = (data) => axios.post(API_URL, data);

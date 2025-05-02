@@ -2,7 +2,7 @@ import Button from './Button';
 import styles from '../styles/App.module.css';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
-const ItemList = ({ items, onEdit, onDelete, onView }) => {
+const ItemList = ({ items, onEdit, onDelete, onView, userRole }) => {
   if (!items.length) return <p className={styles.noItems}>No items found.</p>;
 
   return (
@@ -34,8 +34,12 @@ const ItemList = ({ items, onEdit, onDelete, onView }) => {
                       <td>{item.status}</td>
                       <td className={styles.actions}>
                         <Button onClick={() => onView(item)}>View</Button>
-                        <Button onClick={() => onEdit(item)}>Edit</Button>
-                        <Button onClick={() => onDelete(item.id)}>Delete</Button>
+                        {userRole === 'admin' && (
+                          <>
+                            <Button onClick={() => onEdit(item)}>Edit</Button>
+                            <Button onClick={() => onDelete(item.id)}>Delete</Button>
+                          </>
+                        )}
                       </td>
                     </tr>
                   )}

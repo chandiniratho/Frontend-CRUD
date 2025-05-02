@@ -28,7 +28,6 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
-  // Load items from the API
   const loadItems = async () => {
     const res = await getItems();
     setItems(res.data);
@@ -81,7 +80,6 @@ const Dashboard = () => {
     });
   };
 
-  // Filter items based on search term
   const filtered = items.filter(i =>
     i.name.toLowerCase().includes(search.toLowerCase()) ||
     i.id.toString().includes(search)
@@ -124,13 +122,14 @@ const Dashboard = () => {
 
       {userRole === 'admin' && (
         <Button onClick={() => {
-          setEditing(false); // Reset to "Add" mode
-          setSelected(null); // Clear selected item
+          setEditing(false);
+          setSelected(null);
           setShowModal(true);
-        }}>Add Item</Button>
+        }}>
+          Add Item
+        </Button>
       )}
 
-      {/* Drag-and-Drop List */}
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="items">
           {(provided) => (
@@ -139,11 +138,12 @@ const Dashboard = () => {
                 items={paginated}
                 onView={setViewItem}
                 onEdit={(item) => {
-                  setSelected(item);      // select the item
-                  setEditing(true);       // set editing to true
-                  setShowModal(true);     // show the modal
+                  setSelected(item);
+                  setEditing(true);
+                  setShowModal(true);
                 }}
                 onDelete={handleDelete}
+                userRole={userRole} // ✅ Role passed here
               />
               {provided.placeholder}
             </div>
